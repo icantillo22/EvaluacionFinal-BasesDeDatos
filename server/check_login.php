@@ -3,18 +3,20 @@
 
   $con = new ConectorBD('localhost', 'root', '');
 
-  $response['conexion'] = $con->initConexion('agenda_db');
+  $response['conexion'] = $con->initConexion('agenda');
 
   if ($response['conexion'] == 'OK') {
     $user = $_POST['username'];
     $psw = $_POST['password'];
     $response['msg'] = 'Conectado';
-    $resultado = $con->consultar(['users'], ['*'], 'WHERE email = "'.$user.'"');
+    $resultado = $con->consultar(['usuarios'], ['*'], 'WHERE email = "'.$user.'"');
     $row = $resultado->fetch_assoc();
 
     if ($resultado->num_rows > 0) {
-      if (password_verify($psw, $row['password'])) {
+      if (password_verify($psw, $row['clave'])) {
 			  $response['msg'] = "OK";
+        session_start();
+			  $_SESSION['user'] = $row['id'];
       }else {
         $response['msg'] = 'Contraseña invalida';
       }

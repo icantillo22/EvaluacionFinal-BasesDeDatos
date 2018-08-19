@@ -4,9 +4,9 @@
 
   $con = new ConectorBD('localhost', 'root', '');
 
-  if ($con -> initConexion('agenda_db') == 'OK') {
-    $insert = $con->getConexion()->prepare('INSERT INTO users (email, password, full_name, b_date) VALUES (?,?,?,?)');
-		$insert->bind_param("ssss", $email, $password, $nombre, $fecha_nacimiento);
+  if ($con -> initConexion('agenda') == 'OK') {
+    $insert = $con->getConexion()->prepare('INSERT INTO usuarios (id, nombre, email, clave, nacimiento) VALUES (?,?,?,?,?)');
+		$insert->bind_param("issss", $id, $nombre, $email, $password, $nacimiento);
 
     $hash = password_hash('1234', PASSWORD_DEFAULT);
 
@@ -15,8 +15,8 @@
   		$email = "user".$i."@mail.com";
       $password = $hash;
   		$nombre = "Usuario ".$i;
-  		$fecha_nacimiento = "1998-12-08";
-
+  		$nacimiento = "1998-12-08";
+      $id = $i;
       $insert->execute();
     }
 
