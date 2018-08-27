@@ -37,10 +37,10 @@
       $con->cerrarConexion();
 
     }else {
-      echo "Se presento un error en la conexion";
+      $response['msg'] = "Se presento un error en la conexion";
     }
   }else {
-    $response['msg'] = 'No se ha iniciado ua sesion';
+    $response['msg'] = 'No se ha iniciado una sesion';
   }
 
  ?>

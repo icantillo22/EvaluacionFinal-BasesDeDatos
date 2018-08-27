@@ -47,10 +47,6 @@
          $response['msg'] = "Se ha producido un error en la insercion";
       }
 
-      echo json_encode($response);
-      $con->cerrarConexion();
-
-
     }else {
       echo "Se presento un error en la conexion";
     }
@@ -58,5 +54,9 @@
   }else {
     echo "No ha iniciado sesion";
   }
+
+  echo json_encode($response);
+
+  $con->cerrarConexion();
 
  ?>
